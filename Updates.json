@@ -1,1 +1,72 @@
-
+[
+  {
+    "title": "Pro-Mode Search Parser",
+    "content": "A full recursive-descent parser was introduced that compiles boolean search expressions directly into PostgreSQL tsquery. The parser implements a formal grammar (AND, OR, NOT, FOLLOWED_BY with the adjacency proximity operator and configurable distance operator, plus parenthesized grouping as well as domain specific annotation traversal) via a multi-pass AST pipeline: lexing, parsing, semantic expansion (CommandExpansionPass resolving taxonomic and geographic commands against the database and SPARQL endpoint, TaxonEnrichmentPass enriching plain taxon terms with alternative names from the knowledge graph), AST normalization (deduplication and canonical ordering), and finally tsquery compilation (ProTsQueryCompiler generating PostgreSQL tsquery strings with proper AND conjunction, OR disjunction, NOT negation, adjacency proximity, and distance N syntax). The backend passes proModeActivated=true through the search flow (SearchApi to EnrichedSearchQuery to Search_DefaultImpl to PostgresqlDataInterface) so that the database layer applies to_tsquery with the simple dictionary configuration to preserve operator semantics. Frontend delivers a chip-based visual query builder (proModeSearchBar FreeMarker template, JavaScript, and CSS) with inline editing, command indicators, grouping overlays, and real-time syntax error display fed from ProModeSyntaxException diagnostics.",
+    "date": "2026-03-26",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
+    "title": "DUUI Importer Pipeline Architecture",
+    "content": "The corpus import system was migrated from a legacy CompletableFuture-based batch processor to a staged DUUI pipeline framework. The new pipeline implements a typed document processing graph: a RuntimeSeedGenerator feeds into CorpusToDocuments fork, followed by sequential pipeline stages — document-read (wait-for-batch), document-jcas, parallel document-independent-extraction (UCE metadata, sentences, NER, sentiments, emotions, lemmata, SRL, times, taxonomy, wikilinks, negation, topics, images, permissions all executing concurrently), document-dependent-extraction (geonames, pages, logical-links), document-domain-capture (domain graph recording via AgeGraphService), document-persist (persist-document, persist-domain-association-graph), and finally corpus-finalization (refresh logical links, lexicon, geonames, postprocess, persist operation graph). A DUUI-as-a-service variant (DUUICorpusImporter) wraps this pipeline behind HTTP endpoints implementing the DUUI protocol (at paths for communication layer, type system, process, and input/output details) for integration with external DUUI orchestration. Concurrency robustness was added to all services (PostgresqlDataInterface, AgeGraphService, S3StorageService, JenaSparqlService, LexiconService, EmbeddingService) to handle parallel pipeline stages safely.",
+    "date": "2026-05-14",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
+    "title": "Importer Connection Pooling and Service Resilience",
+    "content": "The import pipeline's database access layer was hardened with HikariCP connection pooling configured through Hibernate (HibernateConf wiring through CommonConfig properties). Pool sizing (maximum 10 connections, minimum 2 idle) with configurable connection timeout (30s), idle timeout (10min), max lifetime (30min), and leak detection threshold (60s) prevents connection exhaustion during parallel pipeline stages. The architecture enforces a strict separation of concerns: pipeline stages define import semantics only and do not own service pool management — each service (PostgresqlDataInterface, AgeGraphService, S3StorageService, JenaSparqlService, LexiconService, EmbeddingService) is responsible for its own capacity, blocking behavior, and retry logic. Safe tsquery SQL functions were designed (15_safe_tsquery_functions.sql) with array-to-tsquery escaping, term length limits, and automatic fallback to plainto_tsquery on overflow. An enhanced two-phase search function (16_enhanced_search_function.sql) chunks large expanded term sets into batches of 50 terms, executes a first-phase query, and only fans out to additional chunked queries if insufficient results are returned, avoiding giant tsquery strings that would degrade PostgreSQL GIN index performance.",
+    "date": "2026-05-14",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
+    "title": "Importer Pipelined Processing with Configurable Parallelism",
+    "content": "The importer was restructured to support configurable thread-level parallelism (via the numThreads command-line flag) that controls DUUI document task concurrency independently of service pool capacity. Input handling was extended to support .xmi, .bz2, .zip, and .gz corpus formats with automatic decompression. The import flow produces S3-stored raw XMI backups when enableS3Storage is set, and executes post-processing continuations (embedding generation, topic modeling, batch management) through DocumentImportContinuation. An importer harness test framework was added with podman-compose orchestration for local profiling, correctness matrix testing across domain subsets, service health checking, and Jupyter-based import profiling notebooks for performance analysis.",
+    "date": "2026-04-30",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
+    "title": "GNFinder Taxon Abbreviation Diagnostic",
+    "content": "A diagnostic script scans imported UCE corpus XMI files for abbreviated gnfinder taxon annotations (e.g. 'C. muricata' where the genus is only an initial) that likely need repair. For each abbreviated gnfinder Taxon element found, the script identifies nearby fully-verified gnfinder VerifiedTaxon annotations by character offset proximitycan limits and GBIF request timeouts.",
+    "date": "2026-05-29",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
+    "title": "FUSEKI GBIF Taxon Enrichment for RDF Patching",
+    "content": "A generic taxon name enrichment tool queries the full GBIF taxonomic API surface to produce comprehensive JSON reports for comparison against Fuseki/TDB RDF store contents. For each input scientific name, the tool resolves exact homonym usages from GBIF species search (casefold-canonical matching), infers the full genus from the nearest verified match starting with the same initial letter, and queries the GBIF species API (species match and species search endpoints) to obtain canonical expansion candidates with confidence scores and taxonomic status. The output is a structured report per query with sections for GBIF match diagnostics, exact canonical usages, accepted usage summaries, source-to-accepted mappings, and a deduplicated expansionNames list used for patching stale SparQL RDF artifacts.",
+    "date": "2026-05-29",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
+    "title": "Podman Compose Deployment and Profile-Based Service Orchestration",
+    "content": "A Podman-compatible compose file (podman-compose.yaml) was added enabling rootless container deployment. A new 'web' Compose profile was introduced allowing the UCE web application to be started standalone without authentication dependencies. The recently patched RDF artifacts from the Fuseki backend, SparQL, enabled valid taxonomic expansions once aga",
+    "date": "2026-05-29",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
+    "title": "Article metadata information reader",
+    "content": "Article, Page, Journal, Volume, Issue, Collection.",
+    "date": "2026-05-11",
+    "author": "Mevlüt Bagci",
+    "email": "bagci@em.uni-frankfurt.de"
+  },
+  {
+    "title": "Corpus meta information display",
+    "content": "UCE displays meta information for individual corpora, such as the number of documents and pages, and which tools were used to process them.",
+    "date": "2026-05-11",
+    "author": "Mevlüt Bagci",
+    "email": "bagci@em.uni-frankfurt.de"
+  },
+  {
+    "title": "UB Journal DUUI BioFID pipeline processing",
+    "content": "Processing of the complete UB Journal with the DUUI BioFID pipeline has been started.",
+    "date": "2026-05-11",
+    "author": "Mevlüt Bagci",
+    "email": "bagci@em.uni-frankfurt.de"
+  }
+]
