@@ -1,14 +1,14 @@
 [
   {
     "title": "Improved Update Overview and Detail View",
-    "content": "The update display on this website has been redesigned to make the overview clearer and easier to navigate. Each update now includes a dedicated title that is shown directly in the list and calendar views. The full update description is no longer displayed immediately in the overview, but is available through the \"Open details\" button. This keeps the update list compact while still allowing users to access the complete content whenever needed."
+    "content": "The update display on this website has been redesigned to make the overview clearer and easier to navigate. Each update now includes a dedicated title that is shown directly in the list and calendar views. The full update description is no longer displayed immediately in the overview, but is available through the \"Open details\" button. This keeps the update list compact while still allowing users to access the complete content whenever needed.",
     "date": "2026-06-01",
     "author": "Mevlüt Bagci",
     "email": "bagci@em.uni-frankfurt.de"
   },
   {
     "title": "DUUI-Adapted Integration of Coreferee for Multilingual Coreference Resolution", 
-    "content": "The coreference resolution tool Coreferee has been integrated into DUUI and adapted to work with spaCy tokens generated within the DUUI pipeline. Instead of relying on Coreferee's own internal spaCy tokenization, the component uses the existing DUUI-generated spaCy token annotations as input for coreference resolution. This ensures better compatibility with DUUI processing workflows and allows coreference information to be added consistently to already processed documents. The integration supports English, German, French, and Polish. Two DUUI variants are available: the small variant (\"sm\") is intended for faster processing, while the large variant (\"lg\") provides a more accurate pipeline for use cases where higher-quality coreference resolution is required."
+    "content": "The coreference resolution tool Coreferee has been integrated into DUUI and adapted to work with spaCy tokens generated within the DUUI pipeline. Instead of relying on Coreferee's own internal spaCy tokenization, the component uses the existing DUUI-generated spaCy token annotations as input for coreference resolution. This ensures better compatibility with DUUI processing workflows and allows coreference information to be added consistently to already processed documents. The integration supports English, German, French, and Polish. Two DUUI variants are available: the small variant (\"sm\") is intended for faster processing, while the large variant (\"lg\") provides a more accurate pipeline for use cases where higher-quality coreference resolution is required.",
     "date": "2026-05-29",
     "author": "Mevlüt Bagci",
     "email": "bagci@em.uni-frankfurt.de"
