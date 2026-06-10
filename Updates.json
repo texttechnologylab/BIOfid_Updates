@@ -1,5 +1,12 @@
 [
   {
+    "title": "Add DUUI-based temporal expression detection components (duui-Time)",
+    "content": "Implement Dockerized DUUI components for selected temporal expression detection backends, including Microsoft Recognizers-Text, Duckling, Stanford SUTime, German GELECTRA, BERT Got-a-Date, TEI2GO, Timexy, and generic Hugging Face token-classification models. Each Docker image now builds a single model- and language-specific TimeX3 service with DUUI endpoints for type system, Lua communication, documentation, and processing. Add model metadata, runtime parameters, TimeX3/ISO-TimeML annotation mapping, per-model Docker build support, external Duckling/CoreNLP service configuration, Java test coverage, and usage documentation for DUUI integration.",
+    "date": "2026-06-10",
+    "author": "Mevlüt Bagci",
+    "email": "[bagci@em.uni-frankfurt.de](mailto:bagci@em.uni-frankfurt.de)"
+  },
+  {
     "title": "Added DUUI-Based Transformer NER Components",
     "content": "This update adds Dockerized DUUI components for selected multilingual transformer-based Named Entity Recognition models, including GLiNER, GLiNER2, RoBERTa, WikiNEuRal, and XLM-R. Each Docker image now provides a dedicated model-specific NER service with DUUI endpoints for the type system, Lua communication layer, documentation, and text processing. The implementation also includes model metadata, configurable runtime parameters, DKPro and TTLab annotation mapping, and usage documentation for integration into DUUI pipelines.",
     "date": "2026-06-08",
