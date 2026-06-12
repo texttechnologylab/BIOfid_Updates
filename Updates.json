@@ -14,6 +14,13 @@
     "email": "[bagci@em.uni-frankfurt.de](mailto:bagci@em.uni-frankfurt.de)"
   },
   {
+    "title": "Added a DUUI-Based Component for creating embeddings using self hosted models in Ollama",
+    "content": "This update adds a Dockerized DUUI component for creating sentence embeddings using models hosted in Ollama. This will be later used to create embeddings of documents before adding them to UCE.",
+    "date": "2026-06-03",
+    "author": "Daniel Bundan",
+    "email": "[bundan@em.uni-frankfurt.de](mailto:bundan@em.uni-frankfurt.de)"
+  },
+  {
     "title": "Improved Update Overview and Detail View",
     "content": "The update display on this website has been redesigned to make the overview clearer and easier to navigate. Each update now includes a dedicated title that is shown directly in the list and calendar views. The full update description is no longer displayed immediately in the overview, but is available through the \"Open details\" button. This keeps the update list compact while still allowing users to access the complete content whenever needed.",
     "date": "2026-06-01",
