@@ -1,5 +1,19 @@
 [
-    {
+  {
+    "title": "UCE-Web: Document Reader Alignment via. ABBY-Annotations",
+    "content": "Implemented structural and surface alignment of previously uniformly-transcribed document-text through existing OCR-Annotations provided by ABBY. Utilized basic structural cordinate data to normalize the rendered document text as readability was inhibited due to unclear distinction of page elements. Full validation against the database will follow after the corrupted fault annotations (detailed in entry 'UCE-Backend Query Troubleshooting') which coincide with initial issues applying parent domain-scoping. Following database correction, domain-scopes will be reevaluated as well. ",
+    "date": "2026-07-03",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
+    "title": "UCE-Backend Query Troubleshooting",
+    "content": "UCE-Search testing surfaced inconsistencies in search results noticeable through duplicate search-results as well as article instance with different parent domain (journals, volumes). Cause for error-responses involved handling of missing document-metadata attempting attempting supplementation of missing metadata through web-scraping on the library-reference of the article. This faulty path was removed however since the imported dataset contains faulty annotations a correction run to revert the supplementation has to be applied to ensure the UCE-backend database in a consistent workable state. ",
+    "date": "2026-07-03",
+    "author": "Dawit Terefe",
+    "email": "s0424382@stud.uni-frankfurt.de"
+  },
+  {
     "title": "UCE-Fuseki-Service Enrichment and Taxon Expansion",
     "content": "Reapplied and validated a refreshed preprocessing of stale and insufficiently enriched SparQL backend of the UCE-Fuseki service. Reason for reapplication is that during Taxon expansion testing of hierarchically top-level ranks, the result was insufficient. The enhanced preprocessing script probed previously unchecked traversals of the GBIF Backbone as well as the API as backup to cover the full ontology. Due to significant increase in scale however the composite-query performing Taxon expansion increased computation duration massively. Further troubleshooting and benchmarking resolved a new separate unified expansion query directly as opposed to separate expansion of different name-paths (synonyms, vernacular, etc.) was implemented. However live latency of a vast expansion request is still not feasible. As a compromise the Taxon expansion API-request is now supplemented with server side caching, further the Fuseki service is explicitely limited in traversal depth. To enable valid exhaustive expansion the following approach will be to partition expansions stage-wise practically through staged BFS, lazily expanding the GBIF-name expansion lazily as the user traverses the graph. ",
     "date": "2026-07-03",
