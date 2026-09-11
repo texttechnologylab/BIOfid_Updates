@@ -1,5 +1,19 @@
 [
   {
+  "title": "BIOfid Workshop at BioSyst EU 2026",
+  "content": "BIOfid participated in BioSyst EU 2026 with a workshop focusing on the Unified Corpora Explorer (UCE) and the Docker Unified UIMA Interface (DUUI). BioSyst EU 2026 took place from 17 to 19 August 2026 in Uppsala, Sweden. The conference started on 17 August at 09:00 and ended on 19 August at 17:00. Further information, demonstrations, and workshop material are available at http://biosyst.workshop.biofid.texttechnologylab.org/.",
+  "date": "2026-08-10",
+  "author": "Mevlüt Bagci",
+  "email": "bagci@em.uni-frankfurt.de"
+},
+{
+  "title": "BIOfid Workshop at TDWG 2026",
+  "content": "BIOfid will participate in TDWG 2026 with a workshop presenting and discussing BIOfid-related tools and infrastructure. TDWG 2026 will take place from 21 to 25 September 2026 in Oslo, Norway. The conference program runs from 08:00 to 17:00 CEST (UTC+2). Further information, demonstrations, and workshop material are available at https://tdwg.workshop.biofid.texttechnologylab.org/. More information about TDWG 2026 is available at https://www.tdwg.org/conferences/2026/.",
+  "date": "2026-09-11",
+  "author": "Mevlüt Bagci",
+  "email": "bagci@em.uni-frankfurt.de"
+}
+  {
     "title": "UCE-Web: Document Reader Alignment via. ABBY-Annotations",
     "content": "Implemented structural and surface alignment of previously uniformly-transcribed document-text through existing OCR-Annotations provided by ABBY. Utilized basic structural cordinate data to normalize the rendered document text as readability was inhibited due to unclear distinction of page elements. Full validation against the database will follow after the corrupted fault annotations (detailed in entry 'UCE-Backend Query Troubleshooting') which coincide with initial issues applying parent domain-scoping. Following database correction, domain-scopes will be reevaluated as well. ",
     "date": "2026-07-03",
